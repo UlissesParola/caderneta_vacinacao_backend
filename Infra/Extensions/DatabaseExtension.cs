@@ -1,4 +1,4 @@
-﻿using Infra.Data;
+﻿using Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

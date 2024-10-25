@@ -1,6 +1,6 @@
 ﻿using Core.Entities;
 using Core.Interfaces.InfraServices;
-using Core.Interfaces.Repositories;
+using Core.Interfaces.Repositories.Queries;
 using Core.Interfaces.Services;
 
 namespace Core.Services;
@@ -8,12 +8,12 @@ namespace Core.Services;
 public class AuthService : IAuthService
 {
     private readonly IIdentityService _identityService;
-    private readonly IUserRepository _userRepository;
+    private readonly IUsuarioQueryRepository _usuarioRepository;
 
-    public AuthService(IIdentityService identityService, IUserRepository userRepository)
+    public AuthService(IIdentityService identityService, IUsuarioQueryRepository usuarioRepository)
     {
         _identityService = identityService;
-        _userRepository = userRepository;
+        _usuarioRepository = usuarioRepository;
     }
 
     public async Task<bool> ValidateUserCredentialsAsync(string email, string password)
@@ -21,8 +21,8 @@ public class AuthService : IAuthService
         return await _identityService.ValidateUserCredentialsAsync(email, password);
     }
 
-    public async Task<User?> GetUserByEmailAsync(string email)
+    public async Task<Usuario?> GetUserByEmailAsync(string email)
     {
-        return await _userRepository.GetUserByEmailAsync(email);
+        return await _usuarioRepository.GetUsuarioByEmailAsync(email);
     }
 }

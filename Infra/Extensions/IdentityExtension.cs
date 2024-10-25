@@ -1,4 +1,4 @@
-﻿using Infra.Data;
+﻿using Infra.Data.Context;
 using Infra.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;

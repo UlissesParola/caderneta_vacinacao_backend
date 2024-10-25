@@ -6,6 +6,6 @@ namespace Infra.Identity;
 
 public class ApplicationUser : IdentityUser
 {
-    public string UserId { get; set; }
-    public virtual User User { get; set; }
+    public string UsuarioId { get; set; }
+    public virtual Usuario Usuario { get; set; }
 }
