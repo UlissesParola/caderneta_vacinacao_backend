@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="FastEndpoints" Version="5.30.0" />
     <PackageReference Include="FastEndpoints.Swagger" Version="5.30.0" />
+    <PackageReference Include="FluentValidation" Version="11.10.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.9.0" />

@@ -42,5 +42,11 @@ public class RegistroVacinaConfiguration : IEntityTypeConfiguration<RegistroVaci
         builder.HasOne(rv => rv.Vacina)
             .WithMany()
             .HasForeignKey(rv => rv.VacinaId);
+
+        // Relacionamento com DoseRecomendada
+        builder.HasOne(rv => rv.DoseRecomendada)
+            .WithMany()
+            .HasForeignKey(rv => rv.DoseRecomendadaId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

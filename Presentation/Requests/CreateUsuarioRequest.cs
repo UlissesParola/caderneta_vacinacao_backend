@@ -1,4 +1,4 @@
-﻿namespace Presentation.Requests;
+﻿namespace Api.Requests;
 
 public record CreateUsuarioRequest(
     string Nome,

@@ -1,8 +1,7 @@
-﻿using Api.Documentation;
+﻿using Api.Requests;
 using Core.Dto;
 using Core.Interfaces.Services;
 using FastEndpoints;
-using Presentation.Requests;
 
 namespace Api.Endpoints;
 
