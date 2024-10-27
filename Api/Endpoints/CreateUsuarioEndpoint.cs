@@ -5,7 +5,6 @@ using FastEndpoints;
 
 namespace Api.Endpoints;
 
-
 public class CreateUsuarioEndpoint : Endpoint<CreateUsuarioRequest>
 {
     private readonly IUsuarioService _usuarioService;

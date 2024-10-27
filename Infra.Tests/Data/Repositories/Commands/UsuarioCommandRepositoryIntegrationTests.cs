@@ -12,62 +12,20 @@ using System.Data;
 
 namespace Infra.Tests.Data.Repositories.Commands;
 
-public class UsuarioCommandRepositoryIntegrationTests : IAsyncLifetime
+public class UsuarioCommandRepositoryIntegrationTests : IntegrationTestBase
 {
-    private readonly SqliteConnection _connection;
-    private readonly AppDbContext _context;
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly IDbConnection _dbConnection;
+    private readonly UsuarioCommandRepository _repository;
 
     public UsuarioCommandRepositoryIntegrationTests()
     {
-        // Criação da conexão SQLite em memória
-        _connection = new SqliteConnection("DataSource=:memory:");
-        _connection.Open(); // Manter a conexão aberta
-
-        // Configuração do DbContext usando a mesma conexão aberta
-        var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseSqlite(_connection)
-            .Options;
-
-        // Configuração dos serviços de identidade
-        var services = new ServiceCollection();
-        services.AddSingleton(new IdentityOptions());
-        services.AddLogging();
-        services.AddDataProtection();
-        services.AddIdentityConfiguration();
-
-        // Configuração do DbContext e Identity
-        services.AddDbContext<AppDbContext>(opt => opt.UseSqlite(_connection));
-        services.AddIdentityCore<ApplicationUser>(options => { })
-            .AddEntityFrameworkStores<AppDbContext>()
-            .AddDefaultTokenProviders();
-
-        var serviceProvider = services.BuildServiceProvider();
-        _context = serviceProvider.GetRequiredService<AppDbContext>();
-        _userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-
-        // Criação do banco de dados na memória
-        _context.Database.EnsureCreated();
-
-        // Obtendo a conexão do IDbConnection a partir do AppDbContext
-        _dbConnection = _context.Database.GetDbConnection();
-    }
-
-    // Limpeza após execução dos testes
-    public Task InitializeAsync() => Task.CompletedTask;
-
-    public async Task DisposeAsync()
-    {
-        await _connection.CloseAsync();
+        // Inicializando o repositório de comandos usando a configuração da classe base
+        _repository = new UsuarioCommandRepository(_userManager, _context);
     }
 
     [Fact]
     public async Task CreateUsuarioAsync_ShouldReturnTrue_WhenUserIsCreatedSuccessfully()
     {
         // Arrange
-        var repository = new UsuarioCommandRepository(_userManager, _context);
-
         var usuario = new Usuario
         {
             Id = "1",
@@ -82,7 +40,7 @@ public class UsuarioCommandRepositoryIntegrationTests : IAsyncLifetime
         string password = "SenhaSegura123";
 
         // Act
-        var result = await repository.CreateUsuarioAsync(usuario, password);
+        var result = await _repository.CreateUsuarioAsync(usuario, password);
 
         // Assert
         Assert.True(result);
@@ -100,8 +58,6 @@ public class UsuarioCommandRepositoryIntegrationTests : IAsyncLifetime
     public async Task CreateUsuarioAsync_ShouldReturnFalse_WhenUserCreationFails()
     {
         // Arrange
-        var repository = new UsuarioCommandRepository(_userManager, _context);
-
         var usuario = new Usuario
         {
             Id = "2",
@@ -116,7 +72,7 @@ public class UsuarioCommandRepositoryIntegrationTests : IAsyncLifetime
         string password = ""; // Password vazio para forçar falha
 
         // Act
-        var result = await repository.CreateUsuarioAsync(usuario, password);
+        var result = await _repository.CreateUsuarioAsync(usuario, password);
 
         // Assert
         Assert.False(result);
@@ -128,8 +84,6 @@ public class UsuarioCommandRepositoryIntegrationTests : IAsyncLifetime
     public async Task UpdateUsuarioAsync_ShouldReturnTrue_WhenUserIsUpdatedSuccessfully()
     {
         // Arrange
-        var repository = new UsuarioCommandRepository(_userManager, _context);
-
         var usuario = new Usuario
         {
             Id = "3",
@@ -144,11 +98,11 @@ public class UsuarioCommandRepositoryIntegrationTests : IAsyncLifetime
         string password = "SenhaSegura123";
 
         // Crie o usuário usando o método do repositório
-        await repository.CreateUsuarioAsync(usuario, password);
+        await _repository.CreateUsuarioAsync(usuario, password);
 
         // Atualiza os dados do usuário
         usuario.Nome = "Carlos Atualizado";
-        var result = await repository.UpdateUsuarioAsync(usuario);
+        var result = await _repository.UpdateUsuarioAsync(usuario);
 
         // Assert
         Assert.True(result);
@@ -160,8 +114,6 @@ public class UsuarioCommandRepositoryIntegrationTests : IAsyncLifetime
     public async Task DeleteUsuarioAsync_ShouldReturnTrue_WhenUserIsDeletedSuccessfully()
     {
         // Arrange
-        var repository = new UsuarioCommandRepository(_userManager, _context);
-
         var usuario = new Usuario
         {
             Id = "4",
@@ -176,10 +128,10 @@ public class UsuarioCommandRepositoryIntegrationTests : IAsyncLifetime
         string password = "SenhaSegura123";
 
         // Crie o usuário usando o método do repositório
-        await repository.CreateUsuarioAsync(usuario, password);
+        await _repository.CreateUsuarioAsync(usuario, password);
 
         // Act
-        var result = await repository.DeleteUsuarioAsync("4");
+        var result = await _repository.DeleteUsuarioAsync("4");
 
         // Assert
         Assert.True(result);
@@ -191,8 +143,6 @@ public class UsuarioCommandRepositoryIntegrationTests : IAsyncLifetime
     public async Task ChangePasswordAsync_ShouldReturnTrue_WhenPasswordIsChangedSuccessfully()
     {
         // Arrange
-        var repository = new UsuarioCommandRepository(_userManager, _context);
-
         var usuario = new Usuario
         {
             Id = "5",
@@ -207,10 +157,10 @@ public class UsuarioCommandRepositoryIntegrationTests : IAsyncLifetime
         string password = "SenhaSegura123";
 
         // Crie o usuário usando o método do repositório
-        await repository.CreateUsuarioAsync(usuario, password);
+        await _repository.CreateUsuarioAsync(usuario, password);
 
         // Change the password
-        var result = await repository.ChangePasswordAsync("5", "NovaSenha123");
+        var result = await _repository.ChangePasswordAsync("5", "NovaSenha123");
 
         // Assert
         Assert.True(result);
