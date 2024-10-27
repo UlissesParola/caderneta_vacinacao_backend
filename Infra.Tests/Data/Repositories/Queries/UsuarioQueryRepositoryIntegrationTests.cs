@@ -37,11 +37,15 @@ public class UsuarioQueryRepositoryIntegrationTests : IAsyncLifetime
             .Options;
 
         // Configuração dos serviços de identidade e autenticação
+        DapperExtension.AddDapperTypeHandlers();
+
         var services = new ServiceCollection();
         services.AddSingleton(new IdentityOptions());
         services.AddLogging();
         services.AddDataProtection();
         services.AddIdentityConfiguration();
+
+
 
         // Adicionando serviços de autenticação necessários para o SignInManager
         services.AddAuthentication("Test")

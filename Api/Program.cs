@@ -10,6 +10,8 @@ builder.Services.AddIoC();
 builder.Services.AddIdentityConfiguration();
 builder.Services.AddDatabaseConfiguration(builder.Configuration);
 
+DapperExtension.AddDapperTypeHandlers();
+
 var app = builder.Build();
 
 app.UseHttpsRedirection();
