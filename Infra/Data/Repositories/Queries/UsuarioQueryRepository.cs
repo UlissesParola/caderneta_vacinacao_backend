@@ -1,9 +1,8 @@
 ﻿using Core.Dto;
 using Core.Entities;
+using Core.Interfaces.InfraServices;
 using Core.Interfaces.Repositories.Queries;
 using Dapper;
-using Infra.Identity;
-using Microsoft.AspNetCore.Identity;
 using System.Data;
 
 namespace Infra.Data.Repositories.Queries;
@@ -11,28 +10,25 @@ namespace Infra.Data.Repositories.Queries;
 public class UsuarioQueryRepository : IUsuarioQueryRepository
 {
     private readonly IDbConnection _dbConnection;
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly IIdentityService _identityService;
 
     public UsuarioQueryRepository(
         IDbConnection dbConnection,
-        UserManager<ApplicationUser> userManager,
-        SignInManager<ApplicationUser> signInManager)
+        IIdentityService identityService)
     {
         _dbConnection = dbConnection;
-        _userManager = userManager;
-        _signInManager = signInManager;
+        _identityService = identityService;
     }
 
     public async Task<Usuario?> GetUsuarioByEmailAsync(string email)
     {
-        // Consulta o ApplicationUser no Identity
-        var applicationUser = await _userManager.FindByEmailAsync(email);
-        if (applicationUser == null) return null;
+        // Consulta o ApplicationUser no Identity usando o IdentityService
+        var applicationUserId = await _identityService.GetUserIdByEmailAsync(email);
+        if (applicationUserId == null) return null;
 
         // Consulta o Usuario no banco de dados usando Dapper
         var sql = "SELECT * FROM Usuarios WHERE ApplicationUserId = @ApplicationUserId";
-        var usuario = await _dbConnection.QueryFirstOrDefaultAsync<Usuario>(sql, new { ApplicationUserId = applicationUser.Id });
+        var usuario = await _dbConnection.QueryFirstOrDefaultAsync<Usuario>(sql, new { ApplicationUserId = applicationUserId });
         return usuario;
     }
 
@@ -46,27 +42,13 @@ public class UsuarioQueryRepository : IUsuarioQueryRepository
 
     public async Task<bool> ValidateUsuarioCredentialsAsync(string email, string password)
     {
-        // Consulta o ApplicationUser no Identity
-        var applicationUser = await _userManager.FindByEmailAsync(email);
-        if (applicationUser == null) return false;
-
-        // Validar as credenciais usando o SignInManager
-        var result = await _signInManager.PasswordSignInAsync(email, password, false, false);
-        return result.Succeeded;
+        // Validar as credenciais usando o IdentityService
+        return await _identityService.SignInAsync(email, password);
     }
 
     public async Task<ApplicationUserDto?> GetApplicationUserByIdAsync(string applicationUserId)
     {
-        // Consulta o ApplicationUser no Identity
-        var applicationUser = await _userManager.FindByIdAsync(applicationUserId);
-        if (applicationUser == null) return null;
-
-        // Retorna um DTO para evitar dependência da camada Infra no Core
-        return new ApplicationUserDto
-        {
-            Id = applicationUser.Id,
-            Email = applicationUser.Email,
-            UserName = applicationUser.UserName
-        };
+        // Consulta o ApplicationUser usando o IdentityService
+        return await _identityService.GetUserByIdAsync(applicationUserId);
     }
 }

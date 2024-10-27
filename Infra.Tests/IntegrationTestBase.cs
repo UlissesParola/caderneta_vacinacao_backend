@@ -63,8 +63,19 @@ public abstract class IntegrationTestBase : IAsyncLifetime
             .AddSignInManager()
             .AddDefaultTokenProviders();
 
+        builder.Services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = "Test";
+            options.DefaultChallengeScheme = "Test";
+        }).AddScheme<AuthenticationSchemeOptions, TestAuthenticationHandler>("Test", options => { });
+
+        builder.Services.AddAuthorization();
+
         // Construção do WebApplication
         var app = builder.Build();
+
+        app.UseAuthentication();
+        app.UseAuthorization();
 
         // Configurando o middleware para configurar o HttpContext durante os testes
         app.Use(async (context, next) =>
@@ -73,6 +84,7 @@ public abstract class IntegrationTestBase : IAsyncLifetime
             contextAccessor.HttpContext = context; // Configura o HttpContext para o SignInManager
             await next(); // Continue para o próximo middleware
         });
+
 
         // Criando o TestServer com os serviços configurados
         var server = new TestServer(app.Services);
