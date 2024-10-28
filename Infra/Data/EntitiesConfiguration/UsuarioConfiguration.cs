@@ -37,7 +37,7 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
 
         // Configurar o relacionamento entre Usuario e ApplicationUser
         builder.HasOne<ApplicationUser>()
-            .WithOne()
+            .WithOne(a => a.Usuario)
             .HasForeignKey<Usuario>(u => u.ApplicationUserId)
             .OnDelete(DeleteBehavior.Cascade);
 

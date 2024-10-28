@@ -9,7 +9,7 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
-        builder.HasOne<Usuario>()
+        builder.HasOne(a => a.Usuario)
             .WithOne()
             .HasForeignKey<Usuario>(u => u.ApplicationUserId)
             .OnDelete(DeleteBehavior.Cascade);

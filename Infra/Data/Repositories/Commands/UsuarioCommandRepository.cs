@@ -24,8 +24,7 @@ public class UsuarioCommandRepository : IUsuarioCommandRepository
         var applicationUser = new ApplicationUser
         {
             UserName = usuario.Email,
-            Email = usuario.Email,
-            UsuarioId = usuario.Id
+            Email = usuario.Email
         };
 
         // Criar o ApplicationUser no Identity
