@@ -12,7 +12,7 @@ public static class CorsExtension
             options.AddPolicy("AllowHerokuClient",
                 builder =>
                 {
-                    builder.WithOrigins("https://caderneta-vacinacao-api-5f6cd69f387d.herokuapp.com")  // Origem do Angular
+                    builder.WithOrigins("https://caderneta-vacinacao-693e63316fd9.herokuapp.com/")  // Origem do Angular
                            .AllowAnyMethod()
                            .AllowAnyHeader();
                 });
