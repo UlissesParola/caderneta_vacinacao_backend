@@ -9,6 +9,7 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <EnvironmentName>Test</EnvironmentName>
   </PropertyGroup>
 
   <ItemGroup>

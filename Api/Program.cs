@@ -8,7 +8,7 @@ builder.Services.AddSwaggerDocumentation();
 builder.Services.AddFastEndpoints();
 builder.Services.AddIoC();
 builder.Services.AddIdentityConfiguration();
-builder.Services.AddDatabaseConfiguration(builder.Configuration);
+builder.Services.AddDatabaseConfiguration(builder.Configuration, builder.Environment);
 
 DapperExtension.AddDapperTypeHandlers();
 

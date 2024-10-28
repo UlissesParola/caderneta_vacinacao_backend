@@ -30,7 +30,7 @@ public static class IoCExtension
 
         //Services
         services.AddScoped<IIdentityService, IdentityService>();  
-        services.AddScoped<IAuthService, AuthService>();    
+        services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IUsuarioService, UsuarioService>();
     }
 }
