@@ -11,13 +11,10 @@ public static class CorsExtension
         {
             options.AddPolicy("CorsPolicy", policy =>
             {
-                policy.WithOrigins(
-                    "https://caderneta-vacinacao-693e63316fd9.herokuapp.com", // Domínio do frontend em produção
-                    "http://localhost:4200",                    // Domínio do frontend em desenvolvimento
-                    "http://localhost:5000"
-                )
-                .AllowAnyHeader()
-                .AllowAnyMethod();
+                policy.AllowAnyOrigin()   // Permite qualquer origem
+                      .AllowAnyHeader()   // Permite todos os cabeçalhos
+                      .AllowAnyMethod()
+                      .AllowCredentials();
             });
         });
     }
