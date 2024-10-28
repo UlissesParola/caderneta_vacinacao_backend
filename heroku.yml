@@ -1,5 +1,6 @@
 build:
   docker:
-    web: ./Dockerfile
+    web: Dockerfile # Certifique-se de que o Dockerfile está na raiz
+
 run:
-  web: dotnet Api.dll # Corrigido o nome do arquivo para corresponder ao esperado no Dockerfile
+  web: dotnet ./Api/Api.dll
