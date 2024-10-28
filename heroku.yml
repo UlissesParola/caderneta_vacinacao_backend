@@ -1,9 +1,5 @@
-﻿setup:
-  addons:
-  - plan: heroku-postgresql
-    as: DATABASE
 build:
   docker:
-    web: ./Dockerfile  # Corrigido para letra maiúscula
+    web: Dockerfile
 run:
   web: dotnet Api.dll  # Corrigido o nome do arquivo para corresponder ao esperado no Dockerfile
