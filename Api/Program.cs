@@ -17,7 +17,6 @@ var app = builder.Build();
 
 app.MigrateDatabase<AppDbContext>();
 
-app.UseHttpsRedirection();
 app.UseSwaggerDocumentation();
 app.UseFastEndpoints();
 
