@@ -140,8 +140,8 @@ public class UsuarioQueryRepositoryTests : IntegrationTestBase
         };
 
         // Usa o UsuarioCommandRepository para criar o usuário
-        var criadoComSucesso = await _usuarioCommandRepository.CreateUsuarioAsync(usuario, senha);
-        if (!criadoComSucesso)
+        var result = await _usuarioCommandRepository.CreateUsuarioAsync(usuario, senha);
+        if (!result.IsSuccess)
             throw new Exception("Falha ao criar o usuário de teste");
 
         return usuario;

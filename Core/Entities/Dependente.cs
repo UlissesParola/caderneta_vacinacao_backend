@@ -7,7 +7,7 @@ public class Dependente
     public string Sobrenome { get; set; }
     public string Cpf { get; set; }
     public DateOnly DataNascimento { get; set; }
-    public string Sexo { get; set; }
+    public string? Sexo { get; set; }
 
     // Relacionamento com Usuários
     public virtual ICollection<UsuarioDependente> UsuarioDependente { get; set; }

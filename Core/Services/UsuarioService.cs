@@ -27,13 +27,13 @@ public class UsuarioService : IUsuarioService
             Sexo = usuarioDto.Sexo
         };
 
-        var success = await _usuarioCommandRepository.CreateUsuarioAsync(usuario, usuarioDto.Password);
+        var result = await _usuarioCommandRepository.CreateUsuarioAsync(usuario, usuarioDto.Password);
 
-        if (success)
+        if (result.IsSuccess)
         {
             return Result<bool>.Success(true);
         }
 
-        return Result<bool>.Failure("Erro ao criar o usuário.", 400);
+        return result;
     }
 }

@@ -43,7 +43,7 @@ public class UsuarioCommandRepositoryIntegrationTests : IntegrationTestBase
         var result = await _repository.CreateUsuarioAsync(usuario, password);
 
         // Assert
-        Assert.True(result);
+        Assert.True(result.IsSuccess);
         var createdUsuario = await _context.Set<Usuario>().FindAsync("1");
         Assert.NotNull(createdUsuario);
         Assert.Equal("João", createdUsuario.Nome);
@@ -75,7 +75,7 @@ public class UsuarioCommandRepositoryIntegrationTests : IntegrationTestBase
         var result = await _repository.CreateUsuarioAsync(usuario, password);
 
         // Assert
-        Assert.False(result);
+        Assert.False(result.IsSuccess);
         var createdUsuario = await _context.Set<Usuario>().FindAsync("2");
         Assert.Null(createdUsuario);
     }

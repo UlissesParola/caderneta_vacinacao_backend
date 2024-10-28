@@ -41,8 +41,8 @@ public class IdentityServiceIntegrationTests : IntegrationTestBase
         };
 
         // Criar o usuário usando o repositório
-        var createResult = await _usuarioCommandRepository.CreateUsuarioAsync(usuario, password);
-        Assert.True(createResult);
+        var result = await _usuarioCommandRepository.CreateUsuarioAsync(usuario, password);
+        Assert.True(result.IsSuccess);
 
         // Act
         var isValid = await _identityService.ValidateUserCredentialsAsync(email, password);
@@ -70,8 +70,8 @@ public class IdentityServiceIntegrationTests : IntegrationTestBase
         };
 
         // Criar o usuário usando o repositório
-        var createResult = await _usuarioCommandRepository.CreateUsuarioAsync(usuario, password);
-        Assert.True(createResult);
+        var result = await _usuarioCommandRepository.CreateUsuarioAsync(usuario, password);
+        Assert.True(result.IsSuccess);
 
         // Act
         var isValid = await _identityService.ValidateUserCredentialsAsync(email, "WrongPassword");
@@ -99,8 +99,8 @@ public class IdentityServiceIntegrationTests : IntegrationTestBase
         };
 
         // Criar o usuário usando o repositório
-        var createResult = await _usuarioCommandRepository.CreateUsuarioAsync(usuario, password);
-        Assert.True(createResult);
+        var result = await _usuarioCommandRepository.CreateUsuarioAsync(usuario, password);
+        Assert.True(result.IsSuccess);
 
         // Act
         var userId = await _identityService.GetUserIdByEmailAsync(email);
@@ -129,8 +129,8 @@ public class IdentityServiceIntegrationTests : IntegrationTestBase
         };
 
         // Criar o usuário usando o repositório
-        var createResult = await _usuarioCommandRepository.CreateUsuarioAsync(usuario, password);
-        Assert.True(createResult);
+        var result = await _usuarioCommandRepository.CreateUsuarioAsync(usuario, password);
+        Assert.True(result.IsSuccess);
 
         // Act
         var userDto = await _identityService.GetUserByIdAsync(usuario.ApplicationUserId);
@@ -161,7 +161,7 @@ public class IdentityServiceIntegrationTests : IntegrationTestBase
 
         // Criar o usuário usando o repositório
         var createResult = await _usuarioCommandRepository.CreateUsuarioAsync(usuario, password);
-        Assert.True(createResult);
+        Assert.True(createResult.IsSuccess);
 
         // Configurar manualmente o HttpContext para o SignInManager
         var httpContext = new DefaultHttpContext
@@ -202,7 +202,7 @@ public class IdentityServiceIntegrationTests : IntegrationTestBase
 
         // Criar o usuário usando o repositório
         var createResult = await _usuarioCommandRepository.CreateUsuarioAsync(usuario, password);
-        Assert.True(createResult);
+        Assert.True(createResult.IsSuccess);
 
         // Act
         var isSignedIn = await _identityService.SignInAsync(email, "WrongPassword");

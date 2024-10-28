@@ -1,5 +1,6 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
+using Infra.Data.Context;
 using Infra.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,8 @@ builder.Services.AddDatabaseConfiguration(builder.Configuration, builder.Environ
 DapperExtension.AddDapperTypeHandlers();
 
 var app = builder.Build();
+
+app.MigrateDatabase<AppDbContext>();
 
 app.UseHttpsRedirection();
 app.UseSwaggerDocumentation();

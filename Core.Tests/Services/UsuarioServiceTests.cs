@@ -2,7 +2,10 @@
 using Core.Entities;
 using Core.Interfaces.Repositories.Commands;
 using Core.Services;
+using Core.Utils;
 using Moq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System;
 
 namespace Core.Tests.Services;
 
@@ -38,7 +41,7 @@ public class UsuarioServiceTests
         // Configura o mock para retornar true quando o método CreateUsuarioAsync for chamado
         _usuarioCommandRepositoryMock
             .Setup(repo => repo.CreateUsuarioAsync(It.IsAny<Usuario>(), usuarioDto.Password))
-            .ReturnsAsync(true);
+            .ReturnsAsync(Result<bool>.Success(true));
 
         // Act
         var result = await _usuarioService.CreateUsuarioAsync(usuarioDto);
@@ -69,7 +72,7 @@ public class UsuarioServiceTests
         // Configura o mock para retornar false quando o método CreateUsuarioAsync for chamado
         _usuarioCommandRepositoryMock
             .Setup(repo => repo.CreateUsuarioAsync(It.IsAny<Usuario>(), usuarioDto.Password))
-            .ReturnsAsync(false);
+            .ReturnsAsync(Result<bool>.Failure("Erro ao criar o usuário.", 400));
 
         // Act
         var result = await _usuarioService.CreateUsuarioAsync(usuarioDto);
@@ -77,7 +80,6 @@ public class UsuarioServiceTests
         // Assert
         Assert.False(result.IsSuccess);
         Assert.Equal(400, result.StatusCode);
-        Assert.False(result.Value);
         Assert.Equal("Erro ao criar o usuário.", result.ErrorMessage);
         _usuarioCommandRepositoryMock.Verify(repo => repo.CreateUsuarioAsync(It.IsAny<Usuario>(), usuarioDto.Password), Times.Once);
     }

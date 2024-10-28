@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Core.Interfaces.Repositories.Commands;
+using Core.Utils;
 using Infra.Data.Context;
 using Infra.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -18,7 +19,7 @@ public class UsuarioCommandRepository : IUsuarioCommandRepository
         _context = context;
     }
 
-    public async Task<bool> CreateUsuarioAsync(Usuario usuario, string password)
+    public async Task<Result<bool>> CreateUsuarioAsync(Usuario usuario, string password)
     {
         // Criar o ApplicationUser para autenticação
         var applicationUser = new ApplicationUser
@@ -30,7 +31,7 @@ public class UsuarioCommandRepository : IUsuarioCommandRepository
         // Criar o ApplicationUser no Identity
         var result = await _userManager.CreateAsync(applicationUser, password);
         if (!result.Succeeded)
-            return false;
+            return Result<bool>.Failure(result.ToString(), 400);
 
         try
         {
@@ -40,13 +41,13 @@ public class UsuarioCommandRepository : IUsuarioCommandRepository
             // Criar o Usuario no banco de dados
             _context.Set<Usuario>().Add(usuario);
             var saved = await _context.SaveChangesAsync() > 0;
-            return saved;
+            return saved ? Result<bool>.Success(saved) : Result<bool>.Failure(saved.ToString(), 400);
         }
         catch (Exception ex)
         {
             // Em caso de falha, remover o ApplicationUser
             await _userManager.DeleteAsync(applicationUser);
-            return false;
+            return Result<bool>.Failure(ex.Message, 500);
         }
     }
 

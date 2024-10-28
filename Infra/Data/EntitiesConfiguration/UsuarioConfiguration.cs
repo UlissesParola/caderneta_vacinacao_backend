@@ -12,6 +12,9 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
         builder.ToTable("Usuarios");
 
         builder.HasKey(u => u.Id);
+        
+        builder.Property(u => u.Id)
+            .ValueGeneratedOnAdd();
 
         builder.Property(u => u.Nome)
             .HasMaxLength(100)
