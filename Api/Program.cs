@@ -34,6 +34,21 @@ var app = builder.Build();
 
 app.UseCors("AllowHerokuClient");
 
+app.Use(async (context, next) =>
+{
+    if (context.Request.Method == "OPTIONS")
+    {
+        context.Response.Headers.Add("Access-Control-Allow-Origin", "*"); // Ou especifique a origem permitida
+        context.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+        context.Response.StatusCode = StatusCodes.Status204NoContent; // Responde com 204 (sem conteúdo) para `OPTIONS`
+        return;
+    }
+
+    await next();
+});
+
 app.MigrateDatabase<AppDbContext>();
 
 app.UseSwaggerDocumentation();
