@@ -1,31 +1,36 @@
-
-# Esta fase é usada durante a execução no VS no modo rápido (Padrão para a configuração de Depuração)
+# Etapa de execução em ambiente de produção (utilizada no Heroku)
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER app
 WORKDIR /app
 EXPOSE 8080
-EXPOSE 8081
 
+# Configurar para escutar na porta dinâmica do Heroku
+ENV ASPNETCORE_URLS=http://+:$PORT
 
-# Esta fase é usada para compilar o projeto de serviço
+# Etapa de build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+
+# Copiar e restaurar dependências
 COPY ["Api/Api.csproj", "Api/"]
 COPY ["Core/Core.csproj", "Core/"]
 COPY ["Infra/Infra.csproj", "Infra/"]
-RUN dotnet restore "./Api/Api.csproj"
+RUN dotnet restore "Api/Api.csproj"
+
+# Copiar todos os arquivos e compilar
 COPY . .
 WORKDIR "/src/Api"
-RUN dotnet build "./Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-# Esta fase é usada para publicar o projeto de serviço a ser copiado para a fase final
+# Etapa de publicação
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-# Esta fase é usada na produção ou quando executada no VS no modo normal (padrão quando não está usando a configuração de Depuração)
+# Etapa final - configuração do contêiner para execução no Heroku
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+# Entrada do contêiner para execução no Heroku
 ENTRYPOINT ["dotnet", "Api.dll"]
