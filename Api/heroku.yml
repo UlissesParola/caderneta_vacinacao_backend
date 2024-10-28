@@ -4,6 +4,6 @@
     as: DATABASE
 build:
   docker:
-    web: ./dockerfile  # O Dockerfile está na raiz do projeto
+    web: ./Dockerfile  # Corrigido para letra maiúscula
 run:
-  web: dotnet API.dll
+  web: dotnet Api.dll  # Corrigido o nome do arquivo para corresponder ao esperado no Dockerfile

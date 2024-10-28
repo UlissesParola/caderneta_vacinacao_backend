@@ -1,5 +1,5 @@
 # Etapa de execução em ambiente de produção (utilizada no Heroku)
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 80
 
@@ -28,9 +28,9 @@ ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # Etapa final - configuração do contêiner para execução no Heroku
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+FROM base AS final
 WORKDIR /app
-COPY --from=build-env /out .
+COPY --from=publish /app/publish .
 
 # Entrada do contêiner para execução no Heroku
 ENTRYPOINT ["dotnet", "Api.dll"]
