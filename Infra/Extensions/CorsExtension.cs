@@ -13,7 +13,8 @@ public static class CorsExtension
             {
                 policy.WithOrigins(
                     "https://caderneta-vacinacao-693e63316fd9.herokuapp.com", // Domínio do frontend em produção
-                    "http://localhost:4200"                    // Domínio do frontend em desenvolvimento
+                    "http://localhost:4200",                    // Domínio do frontend em desenvolvimento
+                    "http://localhost:5000"
                 )
                 .AllowAnyHeader()
                 .AllowAnyMethod();

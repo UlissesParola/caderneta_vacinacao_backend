@@ -20,6 +20,7 @@ builder.Services.AddFastEndpoints();
 builder.Services.AddIoC();
 builder.Services.AddIdentityConfiguration();
 builder.Services.AddDatabaseConfiguration(builder.Configuration, builder.Environment);
+builder.Services.AddCors();
 
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
@@ -30,6 +31,8 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
 DapperExtension.AddDapperTypeHandlers();
 
 var app = builder.Build();
+
+app.UseCors("CorsPolicy");
 
 app.MigrateDatabase<AppDbContext>();
 
