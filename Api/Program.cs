@@ -21,6 +21,12 @@ builder.Services.AddIoC();
 builder.Services.AddIdentityConfiguration();
 builder.Services.AddDatabaseConfiguration(builder.Configuration, builder.Environment);
 
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+    serverOptions.ListenAnyIP(int.Parse(port));
+});
+
 DapperExtension.AddDapperTypeHandlers();
 
 var app = builder.Build();
