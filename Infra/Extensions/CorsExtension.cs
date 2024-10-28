@@ -9,13 +9,13 @@ public static class CorsExtension
     {
         builder.Services.AddCors(options =>
         {
-            options.AddPolicy("CorsPolicy", policy =>
-            {
-                policy.AllowAnyOrigin()   // Permite qualquer origem
-                      .AllowAnyHeader()   // Permite todos os cabeçalhos
-                      .AllowAnyMethod()
-                      .AllowCredentials();
-            });
+            options.AddPolicy("AllowHerokuClient",
+                builder =>
+                {
+                    builder.WithOrigins("https://caderneta-vacinacao-api-5f6cd69f387d.herokuapp.com")  // Origem do Angular
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
         });
     }
 }

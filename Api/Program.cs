@@ -32,7 +32,7 @@ DapperExtension.AddDapperTypeHandlers();
 
 var app = builder.Build();
 
-app.UseCors("CorsPolicy");
+app.UseCors("AllowHerokuClient");
 
 app.MigrateDatabase<AppDbContext>();
 
