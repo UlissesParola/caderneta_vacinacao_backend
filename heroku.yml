@@ -1,5 +1,5 @@
 build:
   docker:
-    web: Dockerfile
+    web: ./Dockerfile
 run:
-  web: dotnet Api.dll  # Corrigido o nome do arquivo para corresponder ao esperado no Dockerfile
+  web: dotnet Api.dll # Corrigido o nome do arquivo para corresponder ao esperado no Dockerfile
