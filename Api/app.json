@@ -1,0 +1,9 @@
+{
+  "name": "caderneta-vacina-api",
+  "description": "Api da aplicação de caderneta de vacinação",
+  "buildpacks": [
+    {
+      "url": "heroku/docker"
+    }
+  ]
+}
