@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity.Data;
 
 namespace Api.Endpoints;
 
-public class LoginEndpoint : Endpoint<LoginRequest, Result<string>>
+public class LoginEndpoint : Endpoint<LoginRequest, string>
 {
     private readonly IAuthService _authService;
     private readonly ITokenService _tokenService;
@@ -30,7 +30,7 @@ public class LoginEndpoint : Endpoint<LoginRequest, Result<string>>
         var isValidUser = await _authService.ValidateUserCredentialsAsync(req.Email, req.Password);
         if (!isValidUser)
         {
-            await SendAsync(Result<string>.Failure("Credenciais inválidas.", 401), statusCode: 401, ct);
+            await SendAsync("Credenciais inválidas.", statusCode: 401, ct);
             return;
         }
 
@@ -38,7 +38,7 @@ public class LoginEndpoint : Endpoint<LoginRequest, Result<string>>
         var user = await _authService.GetUserByEmailAsync(req.Email);
         if (user == null)
         {
-            await SendAsync(Result<string>.Failure("Usuário não encontrado.", 404), statusCode: 404, ct);
+            await SendAsync("Usuário não encontrado.", statusCode: 404, ct);
             return;
         }
 
@@ -46,11 +46,11 @@ public class LoginEndpoint : Endpoint<LoginRequest, Result<string>>
         var tokenResult = _tokenService.GenerateToken(user);
         if (!tokenResult.IsSuccess)
         {
-            await SendAsync(tokenResult, statusCode: tokenResult.StatusCode, ct);
+            await SendAsync(tokenResult.ErrorMessage, statusCode: tokenResult.StatusCode, ct);
             return;
         }
 
-        await SendAsync(tokenResult, cancellation: ct);
+        await SendAsync(tokenResult.Value, cancellation: ct);
     }
 }
 

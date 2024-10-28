@@ -8,7 +8,7 @@ namespace Infra.Data.EntitiesConfiguration
     {
         public void Configure(EntityTypeBuilder<UsuarioDependente> builder)
         {
-            builder.ToTable("UsuariosDependentes");
+            builder.ToTable("usuariosdependentes");
 
             builder.HasKey(ud => new { ud.UsuarioId, ud.DependenteId });
 

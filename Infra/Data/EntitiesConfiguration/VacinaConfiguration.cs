@@ -21,7 +21,7 @@ public class VacinaConfiguration : IEntityTypeConfiguration<Vacina>
 
     public void Configure(EntityTypeBuilder<Vacina> builder)
     {
-        builder.ToTable("Vacinas");
+        builder.ToTable("vacinas");
 
         builder.HasKey(v => v.Id);
 

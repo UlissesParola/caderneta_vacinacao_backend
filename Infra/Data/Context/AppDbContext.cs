@@ -21,5 +21,17 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
 
         base.OnModelCreating(modelBuilder);
+
+        foreach (var entity in modelBuilder.Model.GetEntityTypes())
+        {
+            // Define o nome da tabela em minúsculas
+            entity.SetTableName(entity.GetTableName().ToLowerInvariant());
+
+            // Define os nomes das colunas em minúsculas
+            foreach (var property in entity.GetProperties())
+            {
+                property.SetColumnName(property.Name.ToLowerInvariant());
+            }
+        }
     }
 }

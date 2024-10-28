@@ -8,7 +8,7 @@ public class DependenteConfiguration : IEntityTypeConfiguration<Dependente>
 {
     public void Configure(EntityTypeBuilder<Dependente> builder)
     {
-        builder.ToTable("Dependentes");
+        builder.ToTable("dependentes");
 
         builder.HasKey(d => d.Id);
 

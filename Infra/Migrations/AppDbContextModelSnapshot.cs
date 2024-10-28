@@ -26,218 +26,227 @@ namespace Infra.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
                         .HasMaxLength(11)
-                        .HasColumnType("character varying(11)");
+                        .HasColumnType("character varying(11)")
+                        .HasColumnName("cpf");
 
                     b.Property<DateOnly>("DataNascimento")
-                        .HasColumnType("date");
+                        .HasColumnType("date")
+                        .HasColumnName("datanascimento");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("nome");
 
                     b.Property<string>("Sexo")
-                        .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("sexo");
 
                     b.Property<string>("Sobrenome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("sobrenome");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Dependentes", (string)null);
+                    b.ToTable("dependentes", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.DoseRecomendada", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<int>("IdadeParaAplicacaoEmMeses")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("idadeparaaplicacaoemmeses");
 
                     b.Property<int>("Numero")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("numero");
 
                     b.Property<Guid>("VacinaId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("vacinaid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("VacinaId");
 
-                    b.ToTable("DosesRecomendadas", (string)null);
+                    b.ToTable("dosesrecomendadas", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0abe9477-534c-4c46-89bb-fc4a6f96a7d7"),
+                            Id = new Guid("f6541a2a-a526-436f-a1fd-af2f3142fbd6"),
                             IdadeParaAplicacaoEmMeses = 0,
                             Numero = 1,
-                            VacinaId = new Guid("e8e46de4-7fd0-40e6-b15c-e3253489ac29")
+                            VacinaId = new Guid("c379c194-2b25-4f95-a45b-d2d14918fcfe")
                         },
                         new
                         {
-                            Id = new Guid("1463fbd8-96d7-4437-a75d-252298838980"),
+                            Id = new Guid("65b2edf6-eb38-4fc8-8b41-82fec0eab7bf"),
                             IdadeParaAplicacaoEmMeses = 0,
                             Numero = 1,
-                            VacinaId = new Guid("a2435507-b514-480d-b59d-ec0aad71a41c")
+                            VacinaId = new Guid("a1b90445-a23b-4d00-9ff5-76d9d9c2bd99")
                         },
                         new
                         {
-                            Id = new Guid("86db4ea1-ffc5-4f02-9b50-a2c5e84e8c50"),
+                            Id = new Guid("e70e0ce3-0319-4771-a805-dfcfcc7f845d"),
                             IdadeParaAplicacaoEmMeses = 1,
                             Numero = 2,
-                            VacinaId = new Guid("a2435507-b514-480d-b59d-ec0aad71a41c")
+                            VacinaId = new Guid("a1b90445-a23b-4d00-9ff5-76d9d9c2bd99")
                         },
                         new
                         {
-                            Id = new Guid("9f25dde5-bb26-4e76-8b65-a41571b3d4a2"),
+                            Id = new Guid("ac63b526-3f58-4232-ac85-27d317d34483"),
                             IdadeParaAplicacaoEmMeses = 6,
                             Numero = 3,
-                            VacinaId = new Guid("a2435507-b514-480d-b59d-ec0aad71a41c")
+                            VacinaId = new Guid("a1b90445-a23b-4d00-9ff5-76d9d9c2bd99")
                         },
                         new
                         {
-                            Id = new Guid("57e63ed8-4d21-4114-aca3-5e90fa00e0f6"),
+                            Id = new Guid("3e92a0f4-2cf6-49ad-bf93-10e40e326173"),
                             IdadeParaAplicacaoEmMeses = 2,
                             Numero = 1,
-                            VacinaId = new Guid("a5370edd-661d-40f5-8755-e880c2da21f9")
+                            VacinaId = new Guid("c6644ebd-63cf-4a7b-913b-e21d8191066b")
                         },
                         new
                         {
-                            Id = new Guid("777c1a8b-31a6-4621-9225-47f24afd0cea"),
+                            Id = new Guid("f2910b1c-e5fa-4c43-b7b2-88620c2c78e5"),
                             IdadeParaAplicacaoEmMeses = 4,
                             Numero = 2,
-                            VacinaId = new Guid("a5370edd-661d-40f5-8755-e880c2da21f9")
+                            VacinaId = new Guid("c6644ebd-63cf-4a7b-913b-e21d8191066b")
                         },
                         new
                         {
-                            Id = new Guid("ba6cf18d-184c-4184-b6a0-15c2ba852b27"),
+                            Id = new Guid("872f1c20-981c-4935-bf85-68ad775fe27e"),
                             IdadeParaAplicacaoEmMeses = 6,
                             Numero = 3,
-                            VacinaId = new Guid("a5370edd-661d-40f5-8755-e880c2da21f9")
+                            VacinaId = new Guid("c6644ebd-63cf-4a7b-913b-e21d8191066b")
                         },
                         new
                         {
-                            Id = new Guid("cc30ed8b-d13f-4c99-9897-4c62432d5443"),
+                            Id = new Guid("42b7ac3b-dd0d-466d-8af3-3c6e74bedf3d"),
                             IdadeParaAplicacaoEmMeses = 2,
                             Numero = 1,
-                            VacinaId = new Guid("3dcd36f5-1ff4-4847-822a-6d2b53cc4c81")
+                            VacinaId = new Guid("d2795cf8-95e9-4321-ac80-94fc0b34eead")
                         },
                         new
                         {
-                            Id = new Guid("9442678b-169e-41cc-9236-6f5bd85ff367"),
+                            Id = new Guid("a6e64b35-9307-4f64-a2e4-a31ea3999877"),
                             IdadeParaAplicacaoEmMeses = 4,
                             Numero = 2,
-                            VacinaId = new Guid("3dcd36f5-1ff4-4847-822a-6d2b53cc4c81")
+                            VacinaId = new Guid("d2795cf8-95e9-4321-ac80-94fc0b34eead")
                         },
                         new
                         {
-                            Id = new Guid("237faa1d-10dd-4c78-b048-af24acbfe8ab"),
+                            Id = new Guid("7662852b-cddb-4421-8cb6-d6f00b79bb09"),
                             IdadeParaAplicacaoEmMeses = 2,
                             Numero = 1,
-                            VacinaId = new Guid("2543210a-c000-48b6-9fe8-7c36d1b2a34a")
+                            VacinaId = new Guid("a7fdba5c-5296-4334-ac90-a9ded4fd4403")
                         },
                         new
                         {
-                            Id = new Guid("686e01bb-bc64-4ea3-88c3-57d7df493972"),
+                            Id = new Guid("c8a8fc7b-17fa-4821-a576-41a4c932f4ea"),
                             IdadeParaAplicacaoEmMeses = 4,
                             Numero = 2,
-                            VacinaId = new Guid("2543210a-c000-48b6-9fe8-7c36d1b2a34a")
+                            VacinaId = new Guid("a7fdba5c-5296-4334-ac90-a9ded4fd4403")
                         },
                         new
                         {
-                            Id = new Guid("e5d83861-32b3-48b3-91db-2b7475f9d523"),
+                            Id = new Guid("ab20f03c-41f7-44ff-b9b6-3a2b93e7e4e0"),
                             IdadeParaAplicacaoEmMeses = 12,
                             Numero = 3,
-                            VacinaId = new Guid("2543210a-c000-48b6-9fe8-7c36d1b2a34a")
+                            VacinaId = new Guid("a7fdba5c-5296-4334-ac90-a9ded4fd4403")
                         },
                         new
                         {
-                            Id = new Guid("07353eed-365b-4c5e-a326-e28a891ae2ae"),
+                            Id = new Guid("31c04d01-a82e-4001-a4ab-571e0400c133"),
                             IdadeParaAplicacaoEmMeses = 3,
                             Numero = 1,
-                            VacinaId = new Guid("260ef8b5-eff4-48af-960b-8fbffbda6672")
+                            VacinaId = new Guid("260a06d5-51a3-4f27-877d-8eeb26ce2bb6")
                         },
                         new
                         {
-                            Id = new Guid("cc170eab-1e9f-444e-9993-80e50ee03d8e"),
+                            Id = new Guid("ec1ae12d-e013-438c-a248-66eb0a13c815"),
                             IdadeParaAplicacaoEmMeses = 5,
                             Numero = 2,
-                            VacinaId = new Guid("260ef8b5-eff4-48af-960b-8fbffbda6672")
+                            VacinaId = new Guid("260a06d5-51a3-4f27-877d-8eeb26ce2bb6")
                         },
                         new
                         {
-                            Id = new Guid("6f4f9ab9-64cd-471f-b728-c16f3665f200"),
+                            Id = new Guid("63d225ff-d790-4930-9388-09c8e7f32723"),
                             IdadeParaAplicacaoEmMeses = 9,
                             Numero = 1,
-                            VacinaId = new Guid("52d1f642-d6ce-4fb0-9565-5906cce1e887")
+                            VacinaId = new Guid("1a00c51e-f159-4cfc-9f45-8c8a598e001c")
                         },
                         new
                         {
-                            Id = new Guid("88c85335-0829-41ca-91a7-325a12de3244"),
+                            Id = new Guid("f8b554a5-439a-4179-a72d-9785a7d2929f"),
                             IdadeParaAplicacaoEmMeses = 12,
                             Numero = 1,
-                            VacinaId = new Guid("b80e5206-6f6e-4c51-bf9b-8c7a00df2322")
+                            VacinaId = new Guid("576a24a4-881d-451b-939a-6ce93c9d811f")
                         },
                         new
                         {
-                            Id = new Guid("3b16a058-fa56-4596-aa0d-bfc933c1d434"),
+                            Id = new Guid("546854d6-bd49-4a9b-bd17-053827bf13bd"),
                             IdadeParaAplicacaoEmMeses = 15,
                             Numero = 2,
-                            VacinaId = new Guid("b80e5206-6f6e-4c51-bf9b-8c7a00df2322")
+                            VacinaId = new Guid("576a24a4-881d-451b-939a-6ce93c9d811f")
                         },
                         new
                         {
-                            Id = new Guid("184eceaa-388f-4185-9617-a3f3eb68e7da"),
+                            Id = new Guid("edd567d9-a8de-473f-b0aa-6542ccc1ea8e"),
                             IdadeParaAplicacaoEmMeses = 12,
                             Numero = 1,
-                            VacinaId = new Guid("7bc3e006-a5ba-4586-8122-26cd50851cd1")
+                            VacinaId = new Guid("52b58243-791f-47a3-9736-e1438bdb5a6f")
                         },
                         new
                         {
-                            Id = new Guid("78c5ec89-d6a8-4a82-a1f6-bc737e2a8a14"),
+                            Id = new Guid("a51a4a84-294b-4bbe-8e59-5f6888a0333c"),
                             IdadeParaAplicacaoEmMeses = 15,
                             Numero = 1,
-                            VacinaId = new Guid("e7ff343e-b464-42a1-95a0-f8473c8dbb38")
+                            VacinaId = new Guid("394b910a-dcc4-4b57-b37c-4113c09583a0")
                         },
                         new
                         {
-                            Id = new Guid("6620b1db-9590-4df5-932b-caf47d694b35"),
+                            Id = new Guid("9b89942b-6e43-4ebd-9d4c-d4ea27b55ea0"),
                             IdadeParaAplicacaoEmMeses = 15,
                             Numero = 1,
-                            VacinaId = new Guid("f0deceee-b30c-454a-afe8-23be173aedae")
+                            VacinaId = new Guid("6d3d4ddc-dc69-4e30-8a3a-ec110c225b6f")
                         },
                         new
                         {
-                            Id = new Guid("16a8bb4a-4372-4159-96e2-caed5df65a2d"),
+                            Id = new Guid("2b3895e0-ecba-4dcf-a8cb-e50ea18fbfe3"),
                             IdadeParaAplicacaoEmMeses = 48,
                             Numero = 2,
-                            VacinaId = new Guid("f0deceee-b30c-454a-afe8-23be173aedae")
+                            VacinaId = new Guid("6d3d4ddc-dc69-4e30-8a3a-ec110c225b6f")
                         },
                         new
                         {
-                            Id = new Guid("6efa1cac-7adc-4dde-a849-769c39d75ae2"),
+                            Id = new Guid("e8c48f65-5d84-43b8-ae03-2d2c8fbac8e5"),
                             IdadeParaAplicacaoEmMeses = 144,
                             Numero = 3,
-                            VacinaId = new Guid("f0deceee-b30c-454a-afe8-23be173aedae")
+                            VacinaId = new Guid("6d3d4ddc-dc69-4e30-8a3a-ec110c225b6f")
                         },
                         new
                         {
-                            Id = new Guid("06e7a683-d4b9-4f22-9a7c-30b91b12fa5a"),
+                            Id = new Guid("5c2544bc-5f66-4717-a8ce-4d2531cf6330"),
                             IdadeParaAplicacaoEmMeses = 15,
                             Numero = 1,
-                            VacinaId = new Guid("78e73a94-dbfd-4f65-bb67-3aeac22e4b97")
+                            VacinaId = new Guid("f72c805d-9ef8-4a33-81f3-1f93a10e945c")
                         });
                 });
 
@@ -245,42 +254,52 @@ namespace Infra.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<DateOnly>("DataAplicacao")
-                        .HasColumnType("date");
+                        .HasColumnType("date")
+                        .HasColumnName("dataaplicacao");
 
                     b.Property<DateOnly?>("DataProximaDose")
-                        .HasColumnType("date");
+                        .HasColumnType("date")
+                        .HasColumnName("dataproximadose");
 
                     b.Property<Guid>("DependenteId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("dependenteid");
 
                     b.Property<Guid>("DoseRecomendadaId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("doserecomendadaid");
 
                     b.Property<string>("Laboratorio")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("laboratorio");
 
                     b.Property<string>("Lote")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("lote");
 
                     b.Property<string>("NomeAplicador")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("nomeaplicador");
 
                     b.Property<string>("UnidadeSaude")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("unidadesaude");
 
                     b.Property<Guid>("VacinaId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("vacinaid");
 
                     b.HasKey("Id");
 
@@ -290,158 +309,171 @@ namespace Infra.Migrations
 
                     b.HasIndex("VacinaId");
 
-                    b.ToTable("RegistrosVacinas", (string)null);
+                    b.ToTable("registrosvacinas", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Usuario", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("id");
 
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("applicationuserid");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
                         .HasMaxLength(11)
-                        .HasColumnType("character varying(11)");
+                        .HasColumnType("character varying(11)")
+                        .HasColumnName("cpf");
 
                     b.Property<DateOnly>("DataNascimento")
-                        .HasColumnType("date");
+                        .HasColumnType("date")
+                        .HasColumnName("datanascimento");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("character varying(150)");
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("email");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("nome");
 
                     b.Property<string>("Sexo")
                         .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("sexo");
 
                     b.Property<string>("Sobrenome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("sobrenome");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId")
                         .IsUnique();
 
-                    b.ToTable("Usuarios", (string)null);
+                    b.ToTable("usuarios", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.UsuarioDependente", b =>
                 {
                     b.Property<string>("UsuarioId")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("usuarioid");
 
                     b.Property<Guid>("DependenteId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("dependenteid");
 
                     b.HasKey("UsuarioId", "DependenteId");
 
                     b.HasIndex("DependenteId");
 
-                    b.ToTable("UsuariosDependentes", (string)null);
+                    b.ToTable("usuariosdependentes", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Vacina", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("Descricao")
                         .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("descricao");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("nome");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vacinas", (string)null);
+                    b.ToTable("vacinas", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e8e46de4-7fd0-40e6-b15c-e3253489ac29"),
+                            Id = new Guid("c379c194-2b25-4f95-a45b-d2d14918fcfe"),
                             Descricao = "Protege contra formas graves de tuberculose.",
                             Nome = "BCG"
                         },
                         new
                         {
-                            Id = new Guid("a2435507-b514-480d-b59d-ec0aad71a41c"),
+                            Id = new Guid("a1b90445-a23b-4d00-9ff5-76d9d9c2bd99"),
                             Descricao = "Protege contra hepatite B.",
                             Nome = "Hepatite B"
                         },
                         new
                         {
-                            Id = new Guid("a5370edd-661d-40f5-8755-e880c2da21f9"),
+                            Id = new Guid("c6644ebd-63cf-4a7b-913b-e21d8191066b"),
                             Descricao = "Protege contra difteria, tétano, coqueluche, hepatite B e Haemophilus influenzae tipo B.",
                             Nome = "Pentavalente"
                         },
                         new
                         {
-                            Id = new Guid("3dcd36f5-1ff4-4847-822a-6d2b53cc4c81"),
+                            Id = new Guid("d2795cf8-95e9-4321-ac80-94fc0b34eead"),
                             Descricao = "Protege contra gastroenterite causada por rotavírus.",
                             Nome = "Rotavírus"
                         },
                         new
                         {
-                            Id = new Guid("2543210a-c000-48b6-9fe8-7c36d1b2a34a"),
+                            Id = new Guid("a7fdba5c-5296-4334-ac90-a9ded4fd4403"),
                             Descricao = "Protege contra doenças causadas por pneumococo, como pneumonia, otite e meningite.",
                             Nome = "Pneumocócica 10-valente"
                         },
                         new
                         {
-                            Id = new Guid("260ef8b5-eff4-48af-960b-8fbffbda6672"),
+                            Id = new Guid("260a06d5-51a3-4f27-877d-8eeb26ce2bb6"),
                             Descricao = "Protege contra meningite causada pelo meningococo C.",
                             Nome = "Meningocócica C"
                         },
                         new
                         {
-                            Id = new Guid("52d1f642-d6ce-4fb0-9565-5906cce1e887"),
+                            Id = new Guid("1a00c51e-f159-4cfc-9f45-8c8a598e001c"),
                             Descricao = "Protege contra a febre amarela.",
                             Nome = "Febre Amarela"
                         },
                         new
                         {
-                            Id = new Guid("b80e5206-6f6e-4c51-bf9b-8c7a00df2322"),
+                            Id = new Guid("576a24a4-881d-451b-939a-6ce93c9d811f"),
                             Descricao = "Protege contra sarampo, caxumba e rubéola.",
                             Nome = "Tríplice Viral (SCR)"
                         },
                         new
                         {
-                            Id = new Guid("7bc3e006-a5ba-4586-8122-26cd50851cd1"),
+                            Id = new Guid("52b58243-791f-47a3-9736-e1438bdb5a6f"),
                             Descricao = "Protege contra hepatite A.",
                             Nome = "Hepatite A"
                         },
                         new
                         {
-                            Id = new Guid("e7ff343e-b464-42a1-95a0-f8473c8dbb38"),
+                            Id = new Guid("394b910a-dcc4-4b57-b37c-4113c09583a0"),
                             Descricao = "Protege contra sarampo, caxumba, rubéola e varicela.",
                             Nome = "Tetraviral"
                         },
                         new
                         {
-                            Id = new Guid("f0deceee-b30c-454a-afe8-23be173aedae"),
+                            Id = new Guid("6d3d4ddc-dc69-4e30-8a3a-ec110c225b6f"),
                             Descricao = "Protege contra difteria, tétano e coqueluche.",
                             Nome = "DTP"
                         },
                         new
                         {
-                            Id = new Guid("78e73a94-dbfd-4f65-bb67-3aeac22e4b97"),
+                            Id = new Guid("f72c805d-9ef8-4a33-81f3-1f93a10e945c"),
                             Descricao = "Protege contra a varicela (catapora).",
                             Nome = "Varicela"
                         });
@@ -450,54 +482,69 @@ namespace Infra.Migrations
             modelBuilder.Entity("Infra.Identity.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("id");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("accessfailedcount");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("concurrencystamp");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("email");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("emailconfirmed");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("lockoutenabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("lockoutend");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("normalizedemail");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("normalizedusername");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("passwordhash");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("phonenumber");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("phonenumberconfirmed");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("securitystamp");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("twofactorenabled");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("username");
 
                     b.HasKey("Id");
 
@@ -508,25 +555,29 @@ namespace Infra.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("aspnetusers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("id");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("concurrencystamp");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("name");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("normalizedname");
 
                     b.HasKey("Id");
 
@@ -534,113 +585,131 @@ namespace Infra.Migrations
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("aspnetroles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("claimtype");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("claimvalue");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("roleid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.ToTable("aspnetroleclaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("claimtype");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("claimvalue");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("userid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("aspnetuserclaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("loginprovider");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("providerkey");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("providerdisplayname");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("userid");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
+                    b.ToTable("aspnetuserlogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("userid");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("roleid");
 
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("aspnetuserroles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("userid");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("loginprovider");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("name");
 
                     b.Property<string>("Value")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("value");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
+                    b.ToTable("aspnetusertokens", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.DoseRecomendada", b =>

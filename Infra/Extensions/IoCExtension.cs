@@ -32,5 +32,6 @@ public static class IoCExtension
         services.AddScoped<IIdentityService, IdentityService>();  
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IUsuarioService, UsuarioService>();
+        services.AddScoped<ITokenService,  TokenService>();
     }
 }

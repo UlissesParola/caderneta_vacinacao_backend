@@ -8,7 +8,7 @@ public class DoseRecomendadaConfiguration : IEntityTypeConfiguration<DoseRecomen
 {
     public void Configure(EntityTypeBuilder<DoseRecomendada> builder)
     {
-        builder.ToTable("DosesRecomendadas");
+        builder.ToTable("dosesrecomendadas");
 
         builder.HasKey(dr => dr.Id);
 

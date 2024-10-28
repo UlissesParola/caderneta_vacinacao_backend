@@ -8,7 +8,7 @@ public class RegistroVacinaConfiguration : IEntityTypeConfiguration<RegistroVaci
 {
     public void Configure(EntityTypeBuilder<RegistroVacina> builder)
     {
-        builder.ToTable("RegistrosVacinas");
+        builder.ToTable("registrosvacinas");
 
         builder.HasKey(rv => rv.Id);
 
